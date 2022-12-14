@@ -5,9 +5,14 @@
     body{
         display: flex;
         justify-content: center;
+        transition: all 0.5 ease-in-out;
+    }
+
+    body#background{
+        background-color: black;
     }
     .mainScreenDiv{
-        border: 3px solid rgba(0, 0, 0, 0.397);
+        border: 3px solid rgba(88, 88, 88, 0.349);
         height: 95vh;
         width: 95vw;
         display: inline-flex;
@@ -72,7 +77,7 @@
         padding: 10px;
     }
 
-    .table1{
+    .table{
         background-image: url('./resources/protoimages/cowNtable.png');
         background-size: contain;
         background-repeat: no-repeat;
@@ -108,7 +113,7 @@
 </style>
 </head>
 
-<body>
+<body id="bodyID">
     <div class="mainScreenDiv">
         <div class="kitchenBlock">
             <div class="catalogSection">
@@ -127,11 +132,11 @@
         <div class="customerBlock">
             <div class="characterSection"></div>
             <div class="table123Section">
-                <div class="table1">1</div>
+                <button class="table" id="table1"></button>
                 <div class="grid-item">2</div>
-                <div class="table1">3</div>
+                <button class="table" id="table2"></button>
                 <div class="grid-item">4</div>
-                <div class="table1">5</div>
+                <button class="table" id="table3"></button>
                 <div class="grid-item">6</div>
             </div>
             <div class="actionSection">
@@ -142,12 +147,14 @@
     </div>
 
 <script>
-    
+    const body = document.getElementById('bodyID');
     const burger = document.getElementById('burger');
     const fries = document.getElementById('fries');
     const orderPreview = document.getElementById('orderPreview');
 
-    
+    const table1 = document.getElementById('table1');
+    const table2 = document.getElementById('table2');
+    const table3 = document.getElementById('table3');
     
     
     function spawn(item) {
@@ -168,6 +175,22 @@
         }
     }
 
+    function startOrder(table) {
+        body.style.backgroundColor = "rgb(53, 53, 53)";
+        
+        if (table === 'table1'){
+            table2.style.opacity = "10%";
+            table3.style.opacity = "10%";
+        } else if (table === 'table2'){
+            table1.style.opacity = "10%";
+            table3.style.opacity = "10%";
+        } else if (table === 'table3'){
+            table1.style.opacity = "10%";
+            table2.style.opacity = "10%";
+        }
+        
+    }
+
     burger.addEventListener('click', function(){
         return spawn('burger');
     });
@@ -175,6 +198,17 @@
         return spawn('fries');
     });
 
+    table1.addEventListener('click', function(){
+        return startOrder('table1');
+    });
+
+    table2.addEventListener('click', function(){
+        return startOrder('table2');
+    });
+
+    table3.addEventListener('click', function(){
+        return startOrder('table3');
+    });
    
 
     
