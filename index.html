@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<head>
+<style>
+    body{
+        display: flex;
+        justify-content: center;
+    }
+    .mainScreenDiv{
+        border: 3px solid rgba(0, 0, 0, 0.397);
+        height: 95vh;
+        width: 95vw;
+        display: inline-flex;
+    }
+    
+    .kitchenBlock{
+        border: 3px solid rgba(0, 0, 0, 0.397);
+        height: 95vh;
+        width: 50vw;
+    }
+
+    .catalogSection{
+        border: 3px solid rgba(48, 137, 179, 0.397);
+        height: 30vh;
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-row: 1;
+    }
+
+    .item{
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 40%;
+        transition: all .3s ease-in-out;
+    }
+
+    .item:hover{
+        opacity: 90%;
+    }
+
+
+    #burger{
+        background-image: url('./resources/protoimages/burger.png');
+    }
+
+    #fries{
+        background-image: url('./resources/protoimages/fries.png');
+    }
+    
+
+    .previewSection{
+        border: 3px solid rgba(201, 80, 43, 0.397);
+        height: 65vh;
+    }
+
+    .customerBlock{
+        border: 3px solid rgba(0, 0, 0, 0.397);
+        height: 95vh;
+        width: 50vw;
+    }
+
+    .characterSection{
+        border: 3px solid rgba(179, 48, 146, 0.397);
+        height: 25vh;
+    }
+
+    .table123Section{
+        border: 3px solid rgba(197, 195, 58, 0.397);
+        height:55vh;
+        display: grid;
+        grid-template-columns: auto auto auto;
+        padding: 10px;
+    }
+
+    .table1{
+        background-image: url('./resources/protoimages/cowNtable.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .grid-item{
+        background-color: rgba(255, 255, 0, 0.164);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .grid-item:hover{
+        background-color: rgba(26, 111, 190, 0.164);
+    }
+
+    .actionSection{
+        border: 3px solid rgba(221, 29, 39, 0.397);
+        height: 10vh;
+        display: inline-flex;
+        padding-left: 3vw;
+    }
+
+    .mooButton{
+        background-color: rgba(160, 27, 34, 0.767);
+        width: 20vw;
+    }
+
+    .serveButton{
+        background-color: green;
+        width: 20vw;
+    }
+
+    
+</style>
+</head>
+
+<body>
+    <div class="mainScreenDiv">
+        <div class="kitchenBlock">
+            <div class="catalogSection">
+                <button class="item" id="burger"></button>
+                <button class="item"id="fries"></button>
+                <div class="grid-item">3</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">5</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">7</div>
+                <div class="grid-item">8</div>
+                <div class="grid-item">9</div>
+            </div>
+            <div class="previewSection" id="orderPreview"></div>
+        </div>
+        <div class="customerBlock">
+            <div class="characterSection"></div>
+            <div class="table123Section">
+                <div class="table1">1</div>
+                <div class="grid-item">2</div>
+                <div class="table1">3</div>
+                <div class="grid-item">4</div>
+                <div class="table1">5</div>
+                <div class="grid-item">6</div>
+            </div>
+            <div class="actionSection">
+                <div class="mooButton">MOO AWAY!</div>
+                <div class="serveButton">SERVE!</div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    
+    const burger = document.getElementById('burger');
+    const fries = document.getElementById('fries');
+    const orderPreview = document.getElementById('orderPreview');
+
+    
+    
+    
+    function spawn(item) {
+        var div = document.createElement("div");
+        div.style.width = "50px";
+        div.style.height = "50px";
+        div.style.backgroundSize = "contain";
+        div.style.backgroundRepeat = "no-repeat"  
+
+        if (item === 'burger'){
+            console.log('spawned burger')
+            div.style.backgroundImage = "url('./resources/protoimages/burger.png')";
+            orderPreview.appendChild(div);
+        } else if (item === 'fries'){
+            console.log('spawned fries')
+            div.style.backgroundImage = "url('./resources/protoimages/fries.png')";
+            orderPreview.appendChild(div);
+        }
+    }
+
+    burger.addEventListener('click', function(){
+        return spawn('burger');
+    });
+    fries.addEventListener('click', function(){
+        return spawn('fries');
+    });
+
+   
+
+    
+
+
+</script>
+</body>
