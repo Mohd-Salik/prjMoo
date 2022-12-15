@@ -1,2 +1,4 @@
 # prjMoo
- Javascript
+Author: Mohammad Salik
+
+Javascript

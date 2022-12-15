@@ -83,6 +83,12 @@
         background-repeat: no-repeat;
     }
 
+    .order{
+        border: 3px solid rgb(0, 0, 0);
+        border-radius: 20px;
+        background-color: rgb(255, 255, 255);
+    }
+
     .grid-item{
         background-color: rgba(255, 255, 0, 0.164);
         transition: all 0.3s ease-in-out;
@@ -132,7 +138,9 @@
         <div class="customerBlock">
             <div class="characterSection"></div>
             <div class="table123Section">
-                <button class="table" id="table1"></button>
+                <button class="table" id="table1">
+                    <p class="order" id="table1order">I'd like a burger and fries</p>
+                </button>
                 <div class="grid-item">2</div>
                 <button class="table" id="table2"></button>
                 <div class="grid-item">4</div>
