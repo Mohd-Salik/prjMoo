@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <head>
+    <script src="./resources/javascript/jquery-3.6.2.min.js"></script>
 <style>
     body{
         display: flex;
@@ -30,6 +31,8 @@
         display: grid;
         grid-template-columns: auto auto auto;
         grid-row: 1;
+        position: relative;
+        z-index: 1;
     }
 
     .item{
@@ -37,6 +40,7 @@
         background-repeat: no-repeat;
         opacity: 40%;
         transition: all .3s ease-in-out;
+        position: relative;
     }
 
     .item:hover{
@@ -51,17 +55,50 @@
     #fries{
         background-image: url('./resources/protoimages/fries.png');
     }
+
+    #shutterBG{
+        height: 100%;
+        position: relative;
+        top: -100%;
+        transition: all .5s ease-in-out;
+        z-index: 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+        opacity: 50%;
+        background-image: url('./resources/protoimages/wallmetal.jpg');
+    }
     
+    #shutterBG.raise{
+        top: 0%;
+    }
+
+    #foodPreview{
+        background-color: rgba(255, 0, 0, 0.212);
+        height: 100%;
+        position: relative;
+        top: -100%;
+        z-index: -1;
+    }
+    
+    @keyframes foodfallanim {
+        0% {bottom: 100%;}
+        20% {bottom: 0%;}
+        30% {bottom: 10%;}
+        40% {bottom: 0%;}
+        100% {bottom: 0%;}
+    }
 
     .previewSection{
         border: 3px solid rgba(201, 80, 43, 0.397);
         height: 65vh;
     }
 
+
     .customerBlock{
         border: 3px solid rgba(0, 0, 0, 0.397);
         height: 95vh;
         width: 50vw;
+        
     }
 
     .characterSection{
@@ -105,17 +142,24 @@
         padding-left: 3vw;
     }
 
-    .mooButton{
+    #resetButton{
         background-color: rgba(160, 27, 34, 0.767);
         width: 20vw;
+        opacity: 20%;
     }
 
-    .serveButton{
-        background-color: green;
+    #resetButton.active{
+        opacity: 100%;
+    }
+
+    #serveButton{
         width: 20vw;
+        opacity: 20%;
     }
 
-    
+    #serveButton.active{
+        opacity: 100%;
+    }
 </style>
 </head>
 
@@ -133,10 +177,15 @@
                 <div class="grid-item">8</div>
                 <div class="grid-item">9</div>
             </div>
-            <div class="previewSection" id="orderPreview"></div>
+            <div class="previewSection" id="orderPreview">
+                <div class="shutterBG" id="shutterBG"></div>
+                <div class="foodPreview" id="foodPreview"></div>
+            </div>
         </div>
         <div class="customerBlock">
-            <div class="characterSection"></div>
+            <div class="characterSection">
+                <p id="testtext">this is a test text</p>
+            </div>
             <div class="table123Section">
                 <button class="table" id="table1">
                     <p class="order" id="table1order">I'd like a burger and fries</p>
@@ -148,8 +197,8 @@
                 <div class="grid-item">6</div>
             </div>
             <div class="actionSection">
-                <div class="mooButton">MOO AWAY!</div>
-                <div class="serveButton">SERVE!</div>
+                <button class="button" id="resetButton">MOO~'D a MISTAKE!</button>
+                <button class="button" id="serveButton">SERVE!</button>
             </div>
         </div>
     </div>
@@ -159,6 +208,19 @@
     const burger = document.getElementById('burger');
     const fries = document.getElementById('fries');
     const orderPreview = document.getElementById('orderPreview');
+    const foodPreview = document.getElementById('foodPreview');
+    const shutter = document.getElementById('shutterBG');
+
+    const serveButton = document.getElementById('serveButton');
+    const resetButton = document.getElementById('resetButton');
+
+    const debuggertext = document.getElementById('testtext');
+    
+    
+    const orders = ["burger", "fries"];
+    var finalOrder = [];
+    var orderPrepared = [];
+    
 
     const table1 = document.getElementById('table1');
     const table2 = document.getElementById('table2');
@@ -167,25 +229,32 @@
     
     function spawn(item) {
         var div = document.createElement("div");
-        div.style.width = "50px";
-        div.style.height = "50px";
+        div.style.position = "absolute";
+        div.style.bottom = "100%";
+        div.style.left = Math.floor(Math.random()*70)+"%";
+        div.style.width = "200px";
+        div.style.height = "200px";
         div.style.backgroundSize = "contain";
-        div.style.backgroundRepeat = "no-repeat"  
+        div.style.backgroundRepeat = "no-repeat";
+        div.style.animation = "foodfallanim 1s forwards";  
+        orderPrepared.push(item);
+        checkOrder();
 
         if (item === 'burger'){
-            console.log('spawned burger')
             div.style.backgroundImage = "url('./resources/protoimages/burger.png')";
-            orderPreview.appendChild(div);
+            foodPreview.appendChild(div);
         } else if (item === 'fries'){
-            console.log('spawned fries')
             div.style.backgroundImage = "url('./resources/protoimages/fries.png')";
-            orderPreview.appendChild(div);
+            foodPreview.appendChild(div);
+            
         }
     }
 
     function startOrder(table) {
         body.style.backgroundColor = "rgb(53, 53, 53)";
-        
+        resetButton.classList.toggle("active");
+        createOrder();
+
         if (table === 'table1'){
             table2.style.opacity = "10%";
             table3.style.opacity = "10%";
@@ -196,6 +265,49 @@
             table1.style.opacity = "10%";
             table2.style.opacity = "10%";
         }
+        
+    }
+
+    function createOrder(){
+        finalOrder = [];
+        for (let i = 0; i < 5; i++) {
+            if (i === 0){
+                finalOrder.push(orders[Math.floor(Math.random()*orders.length)]);
+            } else{
+                var stat = Math.random();
+                if (stat > 0.5){
+                    finalOrder.push(orders[Math.floor(Math.random()*orders.length)]);
+                }
+            }
+        }
+        debuggertext.textContent = finalOrder.toString();
+        console.log("order is created" + finalOrder.toString());
+    }
+
+    function checkOrder(){
+        if(finalOrder.sort().join(',')=== orderPrepared.sort().join(',')){
+            console.log('order Complete');
+            serveButton.classList.toggle("active");
+            resetButton.classList.toggle("active");
+        }
+        else console.log('not yet');
+    }
+
+    function serveOrder(){
+        console.log("order is server");
+        shutter.classList.toggle("raise");
+    }
+
+    function resetOrder(){
+        console.log("order is reset");
+        shutter.classList.toggle("raise");
+        setTimeout(function(){
+            while (foodPreview.firstChild) {
+                foodPreview.removeChild(foodPreview.lastChild);
+            }
+            orderPrepared = [];
+            shutter.classList.toggle("raise");
+        }, 500);
         
     }
 
@@ -218,7 +330,13 @@
         return startOrder('table3');
     });
    
+    serveButton.addEventListener('click', function(){
+        return serveOrder();
+    });
 
+    resetButton.addEventListener('click', function(){
+        return resetOrder();
+    });
     
 
 
