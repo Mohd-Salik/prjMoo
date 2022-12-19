@@ -7,26 +7,28 @@
         display: flex;
         justify-content: center;
         transition: all 0.5 ease-in-out;
+        background-image: url('./resources/images/background.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        overflow-y: hidden;
+        overflow-x: hidden;
     }
 
     body#background{
         background-color: black;
     }
     .mainScreenDiv{
-        border: 3px solid rgba(88, 88, 88, 0.349);
         height: 95vh;
         width: 95vw;
         display: inline-flex;
     }
     
     .kitchenBlock{
-        border: 3px solid rgba(0, 0, 0, 0.397);
         height: 95vh;
         width: 50vw;
     }
 
     .catalogSection{
-        border: 3px solid rgba(48, 137, 179, 0.397);
         height: 30vh;
         display: grid;
         grid-template-columns: auto auto auto;
@@ -73,7 +75,6 @@
     }
 
     #foodPreview{
-        background-color: rgba(255, 0, 0, 0.212);
         height: 100%;
         position: relative;
         top: -100%;
@@ -88,6 +89,13 @@
         100% {bottom: 0%;}
     }
 
+    @keyframes returnPosition {
+        0%{opacity: 0%}
+        20%{opacity: 100%}
+        100% {left: 0px; bottom: 0px;}
+    }
+
+
     .previewSection{
         border: 3px solid rgba(201, 80, 43, 0.397);
         height: 65vh;
@@ -95,19 +103,21 @@
 
 
     .customerBlock{
-        border: 3px solid rgba(0, 0, 0, 0.397);
+        
         height: 95vh;
         width: 50vw;
         
     }
 
     .characterSection{
-        border: 3px solid rgba(179, 48, 146, 0.397);
+        background: url('./resources/images/stall_idle.gif') 0 0;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
         height: 25vh;
     }
 
     .table123Section{
-        border: 3px solid rgba(197, 195, 58, 0.397);
         height:55vh;
         display: grid;
         grid-template-columns: auto auto auto;
@@ -115,19 +125,34 @@
     }
 
     .table{
-        background-image: url('./resources/protoimages/cowNtable.png');
+        background: url('./resources/images/cow_walk.gif') 0 0;
+        /* background-image: url('./resources/images/cow_walk.gif'); */
         background-size: contain;
         background-repeat: no-repeat;
+        border-style: none;
+        opacity: 0%;
+        position: relative;
+        transition: all 5s ease-in-out;
+    }
+
+    #table1.active{
+        opacity: 100%;
+    }
+
+    #table2.active{
+        opacity: 100%;
+    }
+
+    #table3.active{
+        opacity: 100%;
     }
 
     .order{
-        border: 3px solid rgb(0, 0, 0);
         border-radius: 20px;
         background-color: rgb(255, 255, 255);
     }
 
     .grid-item{
-        background-color: rgba(255, 255, 0, 0.164);
         transition: all 0.3s ease-in-out;
     }
 
@@ -188,12 +213,16 @@
             </div>
             <div class="table123Section">
                 <button class="table" id="table1">
-                    <p class="order" id="table1order">I'd like a burger and fries</p>
+                    <div id="table1">cow1</div>
                 </button>
                 <div class="grid-item">2</div>
-                <button class="table" id="table2"></button>
+                <button class="table" id="table2">
+                    <div id="table1">cow2</div>
+                </button>
                 <div class="grid-item">4</div>
-                <button class="table" id="table3"></button>
+                <button class="table" id="table3">
+                    <div id="table1">cow3</div>
+                </button>
                 <div class="grid-item">6</div>
             </div>
             <div class="actionSection">
@@ -211,21 +240,69 @@
     const foodPreview = document.getElementById('foodPreview');
     const shutter = document.getElementById('shutterBG');
 
+    const tableFirst = document.getElementById('table1');
+    const tableSecond = document.getElementById('table2');
+    const tableThird = document.getElementById('table3');
+
+    var table1Status = false;
+    var table2Status = false;
+    var table3Status = false;
+    
+
     const serveButton = document.getElementById('serveButton');
     const resetButton = document.getElementById('resetButton');
 
     const debuggertext = document.getElementById('testtext');
+
     
     
     const orders = ["burger", "fries"];
     var finalOrder = [];
     var orderPrepared = [];
-    
+    const maxTimer = 5000; //5 seconds
 
-    const table1 = document.getElementById('table1');
-    const table2 = document.getElementById('table2');
-    const table3 = document.getElementById('table3');
+    setInterval(function(){
+        if (table1Status === false){
+            table1Status = true;
+            console.log("startedTable1")
+            spawnTable(1);
+        }else if (table2Status === false){
+            table2Status = true;
+            console.log("startedTable2")
+            spawnTable(2);
+        }else if (table3Status === false){
+            table3Status = true;
+            console.log("startedTable3")
+            spawnTable(3);
+        }else{console.log("tables are full..")}
+    }, 3000);
     
+    function randomNumber(min, max) { 
+        return Math.random() * (max - min) + min;
+    }
+    
+    function spawnTable(randomtable){
+        // var randomtable = Math.floor(Math.random() * 3) + 1;
+        // var randomtable = 1;
+        if (randomtable === 1){
+            tableFirst.classList.toggle("active");
+            tableFirst.style.left = "-50vw";
+            tableFirst.style.bottom = " "+randomNumber(-40,40)+"vh";
+            tableFirst.style.animation = "returnPosition 10s forwards";
+        }
+        else if (randomtable === 2){
+            tableSecond.classList.toggle("active");
+            tableSecond.style.left = "-75vw";
+            tableSecond.style.bottom = " "+randomNumber(-40,40)+"vh";
+            tableSecond.style.animation = "returnPosition 10s forwards";
+        }
+        else if (randomtable === 3){
+            tableThird.classList.toggle("active");
+            tableThird.style.left = "-50vw";
+            tableThird.style.bottom = " "+randomNumber(-40,40)+"vh";
+            tableThird.style.animation = "returnPosition 10s forwards";
+        }
+    }
     
     function spawn(item) {
         var div = document.createElement("div");
@@ -318,15 +395,15 @@
         return spawn('fries');
     });
 
-    table1.addEventListener('click', function(){
+    tableFirst.addEventListener('click', function(){
         return startOrder('table1');
     });
 
-    table2.addEventListener('click', function(){
+    tableSecond.addEventListener('click', function(){
         return startOrder('table2');
     });
 
-    table3.addEventListener('click', function(){
+    tableThird.addEventListener('click', function(){
         return startOrder('table3');
     });
    
