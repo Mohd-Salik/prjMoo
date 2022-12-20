@@ -6,26 +6,48 @@
     body{
         display: flex;
         justify-content: center;
-        transition: all 0.5 ease-in-out;
-        background-image: url('./resources/images/background.jpeg');
-        background-repeat: no-repeat;
-        background-size: cover;
         overflow-y: hidden;
         overflow-x: hidden;
     }
 
-    body#background{
-        background-color: black;
-    }
-    .mainScreenDiv{
-        height: 95vh;
-        width: 95vw;
+    #mainScreenDiv{
+        height: 100vh;
+        width: 100vw;
         display: inline-flex;
+        z-index: 0;
+    }
+
+    #background{
+        z-index: -1;
+        height: 100vh;
+        width: 100vw;
+        position: absolute;
+        background-image: url('./resources/images/background.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+  
+    #background.dim{
+        filter: brightness(20%);
     }
     
-    .kitchenBlock{
+    #kitchenBlock{
+        opacity: 0%;
         height: 95vh;
         width: 50vw;
+    }
+
+    @keyframes popOutAnim {
+        0%{opacity: 0%; transform: scale(0.6);}
+        30%{opacity: 100%; transform: scale(1.2);}
+        50%{transform: scale(1);}
+    }
+
+    @keyframes popOffAnim {
+        0%{transform: scale(1);}
+        30%{opacity: 100%;  transform: scale(1.2);}
+        50%{opacity: 0%;  transform: scale(0.6);}
+        80%{transform: scale(0.3);}
     }
 
     .catalogSection{
@@ -40,19 +62,21 @@
     .item{
         background-size: contain;
         background-repeat: no-repeat;
-        opacity: 40%;
+        opacity: 80%;
         transition: all .3s ease-in-out;
         position: relative;
     }
 
     .item:hover{
-        opacity: 90%;
+        opacity: 100%;
     }
 
 
     #burger{
         background-image: url('./resources/protoimages/burger.png');
+        /* transform: scale(1); */
     }
+
 
     #fries{
         background-image: url('./resources/protoimages/fries.png');
@@ -103,40 +127,81 @@
 
 
     .customerBlock{
-        
         height: 95vh;
-        width: 50vw;
-        
+        width: 50vw; 
     }
 
-    .characterSection{
+    #characterSection{
         background: url('./resources/images/stall_idle.gif') 0 0;
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
         height: 25vh;
+        display: flex;
+        justify-content: center;
     }
 
-    .table123Section{
+    #characterSection.dim{
+        filter: brightness(20%);
+    }
+
+    .TablesGrid{
         height:55vh;
         display: grid;
         grid-template-columns: auto auto auto;
         padding: 10px;
     }
 
-    .table{
+    .Cow{
         background: url('./resources/images/cow_walk.gif') 0 0;
         /* background-image: url('./resources/images/cow_walk.gif'); */
         background-size: contain;
         background-repeat: no-repeat;
         border-style: none;
+        height: 100%;
+        width: 100%;
         opacity: 0%;
         position: relative;
-        transition: all 5s ease-in-out;
+        filter: brightness(80%);
+        transition: filter 0.3s ease-in-out;
     }
 
-    #table1.active{
-        opacity: 100%;
+    .Cow:hover{
+        filter: brightness(100%);
+    }
+
+
+    .Table{
+        height: 100%;
+        top: -30%;
+        position: relative;
+        background: url('./resources/images/table.png') 0 0;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    #TableSection1.active{
+        filter: brightness(100%);
+    }
+
+    #TableSection2.active{
+        filter: brightness(100%);
+    }
+
+    #TableSection3.active{
+        filter: brightness(100%);
+    }
+
+    #TableSection1.dim{
+        filter: brightness(20%);
+    }
+
+    #TableSection2.dim{
+        filter: brightness(20%);
+    }
+
+    #TableSection3.dim{
+        filter: brightness(20%);
     }
 
     #table2.active{
@@ -146,6 +211,7 @@
     #table3.active{
         opacity: 100%;
     }
+
 
     .order{
         border-radius: 20px;
@@ -160,37 +226,97 @@
         background-color: rgba(26, 111, 190, 0.164);
     }
 
-    .actionSection{
+    #actionSection{
         border: 3px solid rgba(221, 29, 39, 0.397);
         height: 10vh;
         display: inline-flex;
         padding-left: 3vw;
+        opacity: 0%;
     }
 
     #resetButton{
         background-color: rgba(160, 27, 34, 0.767);
         width: 20vw;
-        opacity: 20%;
-    }
-
-    #resetButton.active{
-        opacity: 100%;
     }
 
     #serveButton{
         width: 20vw;
-        opacity: 20%;
     }
 
-    #serveButton.active{
-        opacity: 100%;
+    #orderLine{
+        background-color: rgb(255, 255, 255);
+        border: 3px solid rgb(0, 0, 0);
+        border-radius: 50px;
+        width: fit-content;
+        height: fit-content;
+        padding: 10px;
+        position: relative;
+        top: 100%;
+        text-align: center;
+        opacity: 15%;
     }
+
+    @keyframes shake {
+        0% { transform: translate(1px, 1px) rotate(0deg); }
+        10% { transform: translate(-1px, -2px) rotate(-1deg); }
+        20% { transform: translate(-3px, 0px) rotate(1deg); }
+        30% { transform: translate(3px, 2px) rotate(0deg); }
+        40% { transform: translate(1px, -1px) rotate(1deg); }
+        50% { transform: translate(-1px, 2px) rotate(-1deg); }
+        60% { transform: translate(-3px, 1px) rotate(0deg); }
+        70% { transform: translate(3px, 1px) rotate(-1deg); }
+        80% { transform: translate(-1px, -1px) rotate(1deg); }
+        90% { transform: translate(1px, 2px) rotate(0deg); }
+        100% { transform: translate(1px, -2px) rotate(-1deg); }
+    }
+
+    @keyframes moveIn {
+        0% {left: 150vw;}
+        10% {left: 0vw;}
+        90% {left: 0vw;}
+        100% {left: -150vw;}
+    }
+
+    #animationComplete{
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        left: 150vw;
+    }
+
+    #scanLines{
+        animation: shake 0.5s infinite;
+        background: url('./resources/images/scanlines.jpg') 0 0;
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: relative;
+        bottom: -20vh;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+    }
+
+    #completePun{
+        z-index: 2;
+        position: absolute;
+        font-size: 100px;
+        color: white;
+        bottom: 50vh;
+        width: 100%;
+        text-align: center;
+    }
+
 </style>
 </head>
 
 <body id="bodyID">
-    <div class="mainScreenDiv">
-        <div class="kitchenBlock">
+    <div id="background"></div>
+    <div id="animationComplete">
+        <p id="completePun">AMOOOZING!</p>
+        <div id="scanLines"></div>
+    </div>
+    <div class="mainScreenDiv" id="mainScreenDiv">
+        <div id="kitchenBlock">
             <div class="catalogSection">
                 <button class="item" id="burger"></button>
                 <button class="item"id="fries"></button>
@@ -208,24 +334,29 @@
             </div>
         </div>
         <div class="customerBlock">
-            <div class="characterSection">
-                <p id="testtext">this is a test text</p>
+            <div id="characterSection"><p id="orderLine">...</p></div>
+            <div class="TablesGrid">
+
+                <div class="TableSection" id="TableSection1">
+                    <button class="Cow" id="Cow1"></button>
+                    <div class="Table" id="Table1"></div>
+                </div>
+
+                <div class="TableSection" id="TableSection1.5"></div>
+                <div class="TableSection" id="TableSection2">
+                    <button class="Cow" id="Cow2"></button>
+                    <div class="Table" id="Table2"></div>
+                </div>
+
+                <div class="TableSection" id="TableSection2.5"></div>
+                <div class="TableSection" id="TableSection3">
+                    <button class="Cow" id="Cow3"></button>
+                    <div class="Table" id="Table3"></div>
+                </div>
+                
+                <div class="TableSection" id="TableSection3.5"></div>
             </div>
-            <div class="table123Section">
-                <button class="table" id="table1">
-                    <div id="table1">cow1</div>
-                </button>
-                <div class="grid-item">2</div>
-                <button class="table" id="table2">
-                    <div id="table1">cow2</div>
-                </button>
-                <div class="grid-item">4</div>
-                <button class="table" id="table3">
-                    <div id="table1">cow3</div>
-                </button>
-                <div class="grid-item">6</div>
-            </div>
-            <div class="actionSection">
+            <div id="actionSection">
                 <button class="button" id="resetButton">MOO~'D a MISTAKE!</button>
                 <button class="button" id="serveButton">SERVE!</button>
             </div>
@@ -233,21 +364,39 @@
     </div>
 
 <script>
+    
+    const kitchenBlock = document.getElementById('kitchenBlock');
+    const actionSection = document.getElementById('actionSection');
+    const background = document.getElementById('background');
+    const orderLine = document.getElementById('orderLine');
+    const animationComplete = document.getElementById('animationComplete');
+    const completePun = document.getElementById('completePun');
+    
+    
+
     const body = document.getElementById('bodyID');
     const burger = document.getElementById('burger');
     const fries = document.getElementById('fries');
     const orderPreview = document.getElementById('orderPreview');
     const foodPreview = document.getElementById('foodPreview');
     const shutter = document.getElementById('shutterBG');
-
-    const tableFirst = document.getElementById('table1');
-    const tableSecond = document.getElementById('table2');
-    const tableThird = document.getElementById('table3');
-
-    var table1Status = false;
-    var table2Status = false;
-    var table3Status = false;
     
+    const character = document.getElementById('characterSection');
+
+    const CowFirst = document.getElementById('Cow1');
+    const CowSecond = document.getElementById('Cow2');
+    const CowThird = document.getElementById('Cow3');
+
+    const TableSection1 = document.getElementById('TableSection1');
+    const TableSection2 = document.getElementById('TableSection2');
+    const TableSection3 = document.getElementById('TableSection3');
+
+    //default status of table occupation
+    var CowFirstSit = false;
+    var CowSecondSit = false;
+    var CowThirdSit = false;
+
+    var CurCow;
 
     const serveButton = document.getElementById('serveButton');
     const resetButton = document.getElementById('resetButton');
@@ -259,49 +408,55 @@
     const orders = ["burger", "fries"];
     var finalOrder = [];
     var orderPrepared = [];
+    var orderComplete = false;
     const maxTimer = 5000; //5 seconds
 
     setInterval(function(){
-        if (table1Status === false){
-            table1Status = true;
-            console.log("startedTable1")
+        if(CowFirstSit === false){
+            CowFirstSit = true;
             spawnTable(1);
-        }else if (table2Status === false){
-            table2Status = true;
-            console.log("startedTable2")
+        }else if(CowSecondSit === false){
+            CowSecondSit = true;
             spawnTable(2);
-        }else if (table3Status === false){
-            table3Status = true;
-            console.log("startedTable3")
+        }else if(CowThirdSit === false){
+            CowThirdSit = true;
             spawnTable(3);
-        }else{console.log("tables are full..")}
+        }else{console.log("Tables are Full..");}
     }, 3000);
     
     function randomNumber(min, max) { 
         return Math.random() * (max - min) + min;
     }
     
-    function spawnTable(randomtable){
-        // var randomtable = Math.floor(Math.random() * 3) + 1;
-        // var randomtable = 1;
-        if (randomtable === 1){
-            tableFirst.classList.toggle("active");
-            tableFirst.style.left = "-50vw";
-            tableFirst.style.bottom = " "+randomNumber(-40,40)+"vh";
-            tableFirst.style.animation = "returnPosition 10s forwards";
+    function spawnTable(tableNumber){
+        var cowHolder;
+        if (tableNumber === 1){
+            cowHolder = CowFirst;
+        } else if (tableNumber === 2){
+            cowHolder = CowSecond;
+        } else if (tableNumber === 3){
+            cowHolder = CowThird;
         }
-        else if (randomtable === 2){
-            tableSecond.classList.toggle("active");
-            tableSecond.style.left = "-75vw";
-            tableSecond.style.bottom = " "+randomNumber(-40,40)+"vh";
-            tableSecond.style.animation = "returnPosition 10s forwards";
-        }
-        else if (randomtable === 3){
-            tableThird.classList.toggle("active");
-            tableThird.style.left = "-50vw";
-            tableThird.style.bottom = " "+randomNumber(-40,40)+"vh";
-            tableThird.style.animation = "returnPosition 10s forwards";
-        }
+        cowHolder.style.background = "url('./resources/images/cow_walk.gif') 0 0";
+        cowHolder.style.animation = 'none';
+        cowHolder.style.animation = null;
+        cowHolder.offsetWidth;
+        cowHolder.style.opacity = "100%";
+        cowHolder.style.left = "-50vw";
+        cowHolder.style.bottom = " "+randomNumber(-40,40)+"vh";
+        cowHolder.style.animation = "returnPosition 10s forwards";
+        setTimeout(function(){
+            cowHolder.style.background = "url('./resources/images/cow_think.gif') 0 0";
+            cowHolder.style.backgroundRepeat = "no-repeat";
+            if (tableNumber === 1){
+                CowFirstSit = true;
+            } else if (tableNumber === 2){
+                CowSecondtSit = true;
+            } else if (tableNumber === 3){
+                CowThirdSit = true;
+            }
+        }, 9500)
+        console.log("COW");
     }
     
     function spawn(item) {
@@ -327,23 +482,6 @@
         }
     }
 
-    function startOrder(table) {
-        body.style.backgroundColor = "rgb(53, 53, 53)";
-        resetButton.classList.toggle("active");
-        createOrder();
-
-        if (table === 'table1'){
-            table2.style.opacity = "10%";
-            table3.style.opacity = "10%";
-        } else if (table === 'table2'){
-            table1.style.opacity = "10%";
-            table3.style.opacity = "10%";
-        } else if (table === 'table3'){
-            table1.style.opacity = "10%";
-            table2.style.opacity = "10%";
-        }
-        
-    }
 
     function createOrder(){
         finalOrder = [];
@@ -357,22 +495,34 @@
                 }
             }
         }
-        debuggertext.textContent = finalOrder.toString();
-        console.log("order is created" + finalOrder.toString());
+        orderLine.textContent = finalOrder.toString();
+        orderLine.style.opacity = "100%";
+        console.log("Order: " + finalOrder.toString());
     }
 
     function checkOrder(){
         if(finalOrder.sort().join(',')=== orderPrepared.sort().join(',')){
             console.log('order Complete');
-            serveButton.classList.toggle("active");
-            resetButton.classList.toggle("active");
+            orderLine.textContent = "MOOGICAL! DELISHOUS";
+            orderComplete = true;
         }
-        else console.log('not yet');
+        else console.log('CHECKORDER: NOT COMPLETE');
     }
 
     function serveOrder(){
-        console.log("order is server");
         shutter.classList.toggle("raise");
+        animationComplete.style.animation = null;
+        animationComplete.offsetWidth;
+        animationComplete.style.animation = "moveIn 2s forwards";
+        setTimeout(function(){
+            while (foodPreview.firstChild) {
+                foodPreview.removeChild(foodPreview.lastChild);
+            }
+            orderPrepared = [];
+            shutter.classList.toggle("raise");
+            popOffCow();
+            popOffKitchen()
+        }, 500);
     }
 
     function resetOrder(){
@@ -388,6 +538,45 @@
         
     }
 
+    function popOffCow(){
+        if(CurCow === 1){
+            CowFirstSit = false;
+            CowFirst.style.opacity = "0%";
+        }else if(CurCow === 2){
+            CowSecondSit = false;
+            CowSecond.style.opacity = "0%";
+        }else if(CurCow === 3){
+            CowThirdSit = false;
+            CowThird.style.opacity = "0%";
+        }
+    }
+
+    function popOffKitchen(){
+        character.classList.toggle("dim");
+        background.classList.toggle("dim");
+        kitchenBlock.style.animation = 'none';
+        kitchenBlock.offsetWidth;
+        kitchenBlock.style.animation = "popOffAnim 0.5s forwards";
+        kitchenBlock.style.opacity = "0%";
+        actionSection.style.animation = 'none';
+        actionSection.offsetWidth;
+        actionSection.style.animation = "popOffAnim 0.5s forwards";
+        actionSection.style.opacity = "0%";
+    }
+
+    function popOutKitchen(){
+        character.classList.toggle("dim");
+        background.classList.toggle("dim");
+        kitchenBlock.style.animation = 'none';
+        kitchenBlock.offsetWidth;
+        kitchenBlock.style.opacity = "100%";
+        kitchenBlock.style.animation = "popOutAnim 0.5s forwards";
+        actionSection.style.animation = 'none';
+        actionSection.offsetWidth;
+        actionSection.style.opacity = "100%";
+        actionSection.style.animation = "popOutAnim 0.5s forwards";
+    }
+
     burger.addEventListener('click', function(){
         return spawn('burger');
     });
@@ -395,27 +584,40 @@
         return spawn('fries');
     });
 
-    tableFirst.addEventListener('click', function(){
-        return startOrder('table1');
+    CowFirst.addEventListener('click', function(){
+        if(CowFirstSit === true){
+            CurCow = 1;
+            TableSection1.classList.toggle("active");
+            TableSection2.classList.toggle("dim");
+            TableSection3.classList.toggle("dim");
+            popOutKitchen();
+            createOrder();
+        }
     });
 
-    tableSecond.addEventListener('click', function(){
-        return startOrder('table2');
+    CowSecond.addEventListener('click', function(){
+        if(CowSecondSit === true){
+            return startOrder('Cow2');
+        }
     });
 
-    tableThird.addEventListener('click', function(){
-        return startOrder('table3');
+    CowThird.addEventListener('click', function(){
+        if(CowThirdSit === true){
+            return startOrder('Cow3');
+        }
     });
    
     serveButton.addEventListener('click', function(){
-        return serveOrder();
+        if (orderComplete === true){
+            return serveOrder();
+        } else {console.log("ORDER IS NOT COMPLETE..")}
+       
     });
 
     resetButton.addEventListener('click', function(){
         return resetOrder();
     });
     
-
 
 </script>
 </body>
