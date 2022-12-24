@@ -11,17 +11,17 @@
     }
 
     #mainScreenDiv{
+        display: inline-flex;
         height: 100vh;
         width: 100vw;
-        display: inline-flex;
         z-index: 0;
     }
 
     #background{
+        position: absolute;
         z-index: -1;
         height: 100vh;
         width: 100vw;
-        position: absolute;
         background-image: url('./resources/images/background.jpeg');
         background-repeat: no-repeat;
         background-size: cover;
@@ -74,7 +74,6 @@
 
     #burger{
         background-image: url('./resources/protoimages/burger.png');
-        /* transform: scale(1); */
     }
 
 
@@ -153,17 +152,16 @@
     }
 
     .Cow{
-        /* background: url('./resources/images/cow_walkv2.gif') 0 0; */
         /* background-image: url('./resources/images/cow_walk.gif'); */
-        background-size: cover;
-        background-repeat: no-repeat;
-        border-style: none;
+        position: relative;
         height: 100%;
         width: 100%;
         opacity: 0%;
-        position: relative;
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-style: none;
         filter: brightness(80%);
-        transition: filter 0.3s ease-in-out;
+        transition: filter 0.2s ease-in-out;
     }
 
     .Cow:hover{
@@ -172,9 +170,10 @@
 
 
     .Table{
+        position: relative;
         height: 100%;
         top: -30%;
-        position: relative;
+        
         background: url('./resources/images/table.png') 0 0;
         background-size: contain;
         background-repeat: no-repeat;
@@ -393,14 +392,15 @@
 
     //default status of table occupation
     var CowFirstSit = false;
-    var CowSecondSit = false;
-    var CowThirdSit = false;
+    var CowSecondSit = true;
+    var CowThirdSit = true;
+
+    var TablesAvailability = [0, 0, 0]
 
     var CurCow;
 
     const serveButton = document.getElementById('serveButton');
     const resetButton = document.getElementById('resetButton');
-
     const debuggertext = document.getElementById('testtext');
 
     
@@ -411,17 +411,30 @@
     var orderComplete = false;
     const maxTimer = 5000; //5 seconds
 
+    function findIndexes (array, value) { 
+        var idxs = [];
+        for (var i = array.length - 1; i >= 0; i--) {
+            if (array[i] == value) {
+                idxs.push(i);
+            }
+        }
+        return idxs.sort();
+    };
+
     setInterval(function(){
-        if(CowFirstSit === false){
-            CowFirstSit = true;
-            spawnTable(1);
-        }else if(CowSecondSit === false){
-            CowSecondSit = true;
-            spawnTable(2);
-        }else if(CowThirdSit === false){
-            CowThirdSit = true;
-            spawnTable(3);
-        }else{console.log("Tables are Full..");}
+        var available = findIndexes(TablesAvailability, 0);
+        console.log("available tables are: " + available);
+        
+        if (available.length === 0){
+            console.log("Tables are Full..");
+        }else{
+            var table = Math.floor(Math.random() * (available.length - 1 + 1)) + 1;
+            console.log("random table chosen:" + table);
+            TablesAvailability[available[table - 1]] = 1;
+            console.log("tables availability index" + TablesAvailability)
+            console.log("spawn table number" + table);
+            spawnTable(available[table]);
+        }
     }, 3000);
     
     function randomNumber(min, max) { 
@@ -432,10 +445,13 @@
         var cowHolder;
         if (tableNumber === 1){
             cowHolder = CowFirst;
+            CowFirstSit = true;
         } else if (tableNumber === 2){
             cowHolder = CowSecond;
+            CowSecondSit = true;
         } else if (tableNumber === 3){
             cowHolder = CowThird;
+            CowThirdSit = true;
         }
         cowHolder.style.background = "url('./resources/images/cow_walkv2.gif') 0 0";
         cowHolder.style.backgroundSize = "cover";
@@ -450,13 +466,6 @@
         setTimeout(function(){
             cowHolder.style.background = "url('./resources/images/cow_think.gif') 0 0";
             cowHolder.style.backgroundRepeat = "no-repeat";
-            if (tableNumber === 1){
-                CowFirstSit = true;
-            } else if (tableNumber === 2){
-                CowSecondtSit = true;
-            } else if (tableNumber === 3){
-                CowThirdSit = true;
-            }
         }, 9500)
         console.log("COW");
     }
