@@ -3,11 +3,25 @@
 <head>
     <script src="./resources/javascript/jquery-3.6.2.min.js"></script>
 <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&display=swap');
+    
     body{
         display: flex;
         justify-content: center;
         overflow-y: hidden;
         overflow-x: hidden;
+        cursor: url('./resources/images/cursor1.svg'), auto;
+    }
+
+    button{
+        transform: scale(0.9);
+        transition: transform 0.1s ease-in-out;
+        cursor: url('./resources/images/cursor.svg'), auto;
+    }
+
+    button:hover{
+        transform: scale(1);
     }
 
     #mainScreenDiv{
@@ -120,7 +134,6 @@
 
 
     .previewSection{
-        border: 3px solid rgba(201, 80, 43, 0.397);
         height: 65vh;
     }
 
@@ -226,7 +239,6 @@
     }
 
     #actionSection{
-        border: 3px solid rgba(221, 29, 39, 0.397);
         height: 10vh;
         display: inline-flex;
         padding-left: 3vw;
@@ -234,25 +246,40 @@
     }
 
     #resetButton{
-        background-color: rgba(160, 27, 34, 0.767);
+        border: 2px solid rgba(0, 0, 0, 0.397);
+        border-radius: 50px;
+        margin-right: 20px;
+        font-size: 30px;
+        color: rgb(255, 215, 215);
+        font-family: 'Rubik Spray Paint', cursive;
+        background-color: rgb(0, 0, 0);
         width: 20vw;
+        box-shadow: 5px 10px 8px #000000;
     }
 
     #serveButton{
+        border: 2px solid rgba(0, 0, 0, 0.397);
+        border-radius: 50px;
+        font-size: 30px;
+        color: rgb(56, 56, 1);
+        font-family: 'Rubik Spray Paint', cursive;
+        background-color: white;
         width: 20vw;
+        box-shadow: 5px 10px 8px #000000;
     }
 
     #orderLine{
         background-color: rgb(255, 255, 255);
         border: 3px solid rgb(0, 0, 0);
         border-radius: 50px;
+        font-family: 'Rubik Spray Paint', cursive;
         width: fit-content;
         height: fit-content;
         padding: 10px;
         position: relative;
         top: 100%;
         text-align: center;
-        opacity: 15%;
+        opacity: 0%;
     }
 
     @keyframes shake {
@@ -299,20 +326,229 @@
         z-index: 2;
         position: absolute;
         font-size: 100px;
+        font-family: 'Rubik Spray Paint', cursive;
         color: white;
-        bottom: 50vh;
-        width: 100%;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        top: 25vh;
+        left: 45vw;
         text-align: center;
     }
+
+    #completeCow{
+        z-index: 2;
+        position: absolute;
+        height: 100%;
+        width: 50%;
+        left: 0px;
+    }
+
+    #mooPhone{
+        opacity: 0%;
+        position: absolute;
+        z-index: 2;
+        height: 90vh;
+        width: 30vw;
+        top: 30px;
+        left: 50px;
+        background: url('./resources/images/moophone_bg.jpg') 0 0;
+        border: 2px solid rgb(0, 0, 0);
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        box-shadow: 5px 10px 8px #000000;
+    }
+
+    #phoneScreen{
+        position: relative;
+        height: 90%;
+        width: 100%;
+        background: url('./resources/images/moopanda_bg.jpg') 0 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-radius: 20px;
+    }
+
+    .phoneHelp{
+        position: relative;
+        transform: scale(0.8);
+        width: 100%;
+        height: auto;
+        border: 0px solid rgb(0, 0, 0);
+        border-radius: 50px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .phoneHelp:hover{
+        transform: scale(0.9);
+    }
+
+    #phoneLogo{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 50%;
+    }
+
+    #logo{
+        position: relative;
+        height: 30%;
+        width: 100%;
+        background: url('./resources/images/moopanda_logo.gif') 0 0;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    #name{
+        position: relative;
+        height: 15%;
+        background: url('./resources/images/moopanda_name.gif') 0 0;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    #stars{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        height: 20%;
+    }
+
+    #star1{
+        opacity: 20%;
+        position: relative;
+        width: 40%;
+        background: url('./resources/images/star_empty.gif') 0 0;
+        background-size: contain;
+        background-repeat: no-repeat;   
+    }
+
+    #star2{
+        opacity: 20%;
+        position: relative;
+        width: 40%;
+        background: url('./resources/images/star_empty.gif') 0 0;
+        background-size: contain;
+        background-repeat: no-repeat;   
+    }
+
+    #star3{
+        opacity: 20%;
+        position: relative;
+        width: 40%;
+        background: url('./resources/images/star_empty.gif') 0 0;
+        background-size: contain;
+        background-repeat: no-repeat;   
+    }
+
+    #star4{
+        opacity: 20%;
+        position: relative;
+        width: 40%;
+        background: url('./resources/images/star_empty.gif') 0 0;
+        background-size: contain;
+        background-repeat: no-repeat;   
+    }
+
+    #levelTracker{
+        height: 10%;
+        width: 100%;
+        font-size: 25px;
+        text-align: center;
+        color: black;
+    }
+
+    #notifbarContainer{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        height: 5%;
+        background-color: aliceblue;
+        border-radius: 20px;
+    }
+
+    #cell{
+        margin-left: 20px;
+        position: relative;
+        top: 50%;
+        height: 80%;
+        width: 100%;
+        background: url('./resources/images/signal.png') 0 0;
+        background-size: contain;
+        background-repeat: no-repeat; 
+        transform: translateY(-50%);  
+    }
+
+    #alarm{
+        position: relative;
+        top: 50%;
+        padding-right: 50%;
+        height: 80%;
+        width: 100%;
+        background: url('./resources/images/alarm.png') 0 0;
+        background-size: contain;
+        background-repeat: no-repeat;  
+        transform: translateY(-50%); 
+    }
+
+    #battery{
+        position: relative;
+        top: 50%;
+        height: 80%;
+        width: 100%;
+        background: url('./resources/images/battery.png') 0 0;
+        background-size: contain;
+        background-repeat: no-repeat;   
+        transform: translateY(-50%);
+    }
+
+    #time{
+        position: relative;
+        top: 70%;
+        height: 100%;
+        width: 200%;  
+        transform: translateY(-50%);
+    }
+    
 
 </style>
 </head>
 
 <body id="bodyID">
     <div id="background"></div>
+    <div id="mooPhone">
+        <div id="phoneScreen">
+            <div id="notifbarContainer">
+                <div id="cell"></div>
+                <div id="alarm"></div>
+                <div id="battery"></div>
+                <div id="time">4:38 AM</div>
+            </div>
+            <div id="phoneLogo">
+                <div id="logo">.</div>
+                <div id="name">.</div>
+            </div>
+            <div id="stars">
+                <div id="star1"></div>
+                <div id="star2"></div>
+                <div id="star3"></div>
+                <div id="star4"></div>
+            </div>
+            <h1 id="levelTracker">Next Moochelin star in:</h1>
+            <button class="phoneHelp" id="phoneHelp">HELP</button>
+        </div>
+        
+    </div>
     <div id="animationComplete">
         <p id="completePun">AMOOOZING!</p>
+        <div id="completeCow"></div>
         <div id="scanLines"></div>
+        
     </div>
     <div class="mainScreenDiv" id="mainScreenDiv">
         <div id="kitchenBlock">
@@ -356,7 +592,7 @@
                 <div class="TableSection" id="TableSection3.5"></div>
             </div>
             <div id="actionSection">
-                <button class="button" id="resetButton">MOO~'D a MISTAKE!</button>
+                <button class="button" id="resetButton">I MOO~'D a MISTAKE!</button>
                 <button class="button" id="serveButton">SERVE!</button>
             </div>
         </div>
@@ -369,9 +605,12 @@
     const background = document.getElementById('background');
     const orderLine = document.getElementById('orderLine');
     const animationComplete = document.getElementById('animationComplete');
+    const completeCowAnim = document.getElementById('completeCow');
     const completePun = document.getElementById('completePun');
+
     
-    
+    const mooPhone = document.getElementById('mooPhone');
+    const time = document.getElementById('time');
 
     const body = document.getElementById('bodyID');
     const burger = document.getElementById('burger');
@@ -392,12 +631,14 @@
 
     //default status of table occupation
     var CowFirstSit = false;
-    var CowSecondSit = true;
-    var CowThirdSit = true;
+    var CowSecondSit = false;
+    var CowThirdSit = false;
 
-    var TablesAvailability = [0, 0, 0]
+    var TablesAvailability = [0, 0, 0];
+    const cowCompleteAnimations = ["served1.gif", "served2.gif", "served3.gif"];
 
-    var CurCow;
+    var CurCow = 0;
+    var serveButtonStatus = false;
 
     const serveButton = document.getElementById('serveButton');
     const resetButton = document.getElementById('resetButton');
@@ -407,9 +648,15 @@
     
     const orders = ["burger", "fries"];
     var finalOrder = [];
+    var sortedOrder = [];
     var orderPrepared = [];
     var orderComplete = false;
     const maxTimer = 5000; //5 seconds
+
+    mooPhone.style.animation = 'none';
+    mooPhone.offsetWidth;
+    mooPhone.style.opacity = "100%";
+    mooPhone.style.animation = "popOutAnim 0.5s forwards";
 
     function findIndexes (array, value) { 
         var idxs = [];
@@ -421,21 +668,29 @@
         return idxs.sort();
     };
 
+    function test(){
+        animationComplete.style.animation = null;
+        animationComplete.offsetWidth;
+        animationComplete.style.animation = "moveIn 2s forwards";
+    }
+
+    setInterval(function(){
+        var d = new Date();
+        var hours = d.getHours(); // => 9
+        var minutes = d.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        time.textContent = " " + hours.toString() + ": " + minutes.toString() + " " + ampm.toUpperCase();
+    }, 1000)
+
     setInterval(function(){
         var available = findIndexes(TablesAvailability, 0);
-        console.log("available tables are: " + available);
-        
         if (available.length === 0){
-            console.log("Tables are Full..");
         }else{
-            var table = Math.floor(Math.random() * (available.length - 1 + 1)) + 1;
-            console.log("random table chosen:" + table);
-            TablesAvailability[available[table - 1]] = 1;
-            console.log("tables availability index" + TablesAvailability)
-            console.log("spawn table number" + table);
-            spawnTable(available[table]);
+            var table = available[Math.floor(Math.random()*available.length)];
+            TablesAvailability[table] = 1;
+            spawnTable(table + 1);
         }
-    }, 3000);
+    }, 1000);
     
     function randomNumber(min, max) { 
         return Math.random() * (max - min) + min;
@@ -445,13 +700,10 @@
         var cowHolder;
         if (tableNumber === 1){
             cowHolder = CowFirst;
-            CowFirstSit = true;
         } else if (tableNumber === 2){
             cowHolder = CowSecond;
-            CowSecondSit = true;
         } else if (tableNumber === 3){
             cowHolder = CowThird;
-            CowThirdSit = true;
         }
         cowHolder.style.background = "url('./resources/images/cow_walkv2.gif') 0 0";
         cowHolder.style.backgroundSize = "cover";
@@ -464,10 +716,17 @@
         cowHolder.style.bottom = " "+randomNumber(-40,40)+"vh";
         cowHolder.style.animation = "returnPosition 10s forwards";
         setTimeout(function(){
-            cowHolder.style.background = "url('./resources/images/cow_think.gif') 0 0";
+            cowHolder.style.background = "url('./resources/images/cow_thinkv2.gif') 0 0";
             cowHolder.style.backgroundRepeat = "no-repeat";
+            cowHolder.style.backgroundSize = "cover";
+            if (tableNumber === 1){
+                CowFirstSit = true;
+            } else if (tableNumber === 2){
+                CowSecondSit = true;
+            } else if (tableNumber === 3){
+                CowThirdSit = true;
+            }
         }, 9500)
-        console.log("COW");
     }
     
     function spawn(item) {
@@ -495,7 +754,11 @@
 
 
     function createOrder(){
+        serveButtonStatus = false;
+        serveButton.style.opacity = "20%";
+        orderLine.style.opacity = "100%";
         finalOrder = [];
+        sortedOrder = [];
         for (let i = 0; i < 5; i++) {
             if (i === 0){
                 finalOrder.push(orders[Math.floor(Math.random()*orders.length)]);
@@ -507,21 +770,30 @@
             }
         }
         orderLine.textContent = finalOrder.toString();
+        finalOrder.forEach((element) => {sortedOrder.push(element)});
         orderLine.style.opacity = "100%";
-        console.log("Order: " + finalOrder.toString());
     }
 
     function checkOrder(){
-        if(finalOrder.sort().join(',')=== orderPrepared.sort().join(',')){
-            console.log('order Complete');
-            orderLine.textContent = "MOOGICAL! DELISHOUS";
+        if(sortedOrder.sort().join(',') === orderPrepared.sort().join(',')){
+            serveButtonStatus = true;
+            serveButton.style.opacity = "100%";
+            orderLine.textContent = "Yum!";
             orderComplete = true;
         }
-        else console.log('CHECKORDER: NOT COMPLETE');
+        else { 
+            console.log("check order"+finalOrder);
+            serveButtonStatus = false;
+            serveButton.style.opacity = "20%";};
     }
 
     function serveOrder(){
         shutter.classList.toggle("raise");
+        var cowAnimation = cowCompleteAnimations[Math.floor(Math.random()*cowCompleteAnimations.length)]
+        completeCowAnim.style.background = "url('./resources/images/"+cowAnimation+"') 0 0";
+        completeCowAnim.style.backgroundRepeat = "no-repeat";
+        completeCowAnim.style.backgroundSize = "cover";
+        
         animationComplete.style.animation = null;
         animationComplete.offsetWidth;
         animationComplete.style.animation = "moveIn 2s forwards";
@@ -533,37 +805,47 @@
             shutter.classList.toggle("raise");
             popOffCow();
             popOffKitchen()
+            CurCow = 0;
         }, 500);
     }
 
     function resetOrder(){
-        console.log("order is reset");
         shutter.classList.toggle("raise");
+        serveButtonStatus = false;
+        serveButton.style.opacity = "20%";
+        orderPrepared = [];
+        console.log("reset order"+finalOrder);
+        orderLine.textContent = finalOrder.toString();
         setTimeout(function(){
             while (foodPreview.firstChild) {
                 foodPreview.removeChild(foodPreview.lastChild);
             }
-            orderPrepared = [];
             shutter.classList.toggle("raise");
         }, 500);
         
     }
 
     function popOffCow(){
+        TablesAvailability[CurCow - 1] = 0;
         if(CurCow === 1){
             CowFirstSit = false;
             CowFirst.style.opacity = "0%";
+            TableSection2.classList.toggle("dim");
+            TableSection3.classList.toggle("dim");
         }else if(CurCow === 2){
             CowSecondSit = false;
             CowSecond.style.opacity = "0%";
+            TableSection1.classList.toggle("dim");
+            TableSection3.classList.toggle("dim");
         }else if(CurCow === 3){
             CowThirdSit = false;
             CowThird.style.opacity = "0%";
+            TableSection1.classList.toggle("dim");
+            TableSection2.classList.toggle("dim");
         }
     }
 
     function popOffKitchen(){
-        character.classList.toggle("dim");
         background.classList.toggle("dim");
         kitchenBlock.style.animation = 'none';
         kitchenBlock.offsetWidth;
@@ -573,10 +855,25 @@
         actionSection.offsetWidth;
         actionSection.style.animation = "popOffAnim 0.5s forwards";
         actionSection.style.opacity = "0%";
+        orderLine.style.opacity = "0%";
+
+        setTimeout(function(){
+            mooPhone.style.left = "50px";
+            mooPhone.style.animation = 'none';
+            mooPhone.offsetWidth;
+            mooPhone.style.opacity = "100%";
+            mooPhone.style.animation = "popOutAnim 0.5s forwards";
+        }, 1500)
+        
     }
 
     function popOutKitchen(){
-        character.classList.toggle("dim");
+        mooPhone.style.animation = 'none';
+        mooPhone.offsetWidth;
+        mooPhone.style.animation = "popOffAnim 0.5s forwards";
+        mooPhone.style.opacity = "0%";
+        mooPhone.style.left = "-500px";
+
         background.classList.toggle("dim");
         kitchenBlock.style.animation = 'none';
         kitchenBlock.offsetWidth;
@@ -588,6 +885,7 @@
         actionSection.style.animation = "popOutAnim 0.5s forwards";
     }
 
+    
     burger.addEventListener('click', function(){
         return spawn('burger');
     });
@@ -596,37 +894,70 @@
     });
 
     CowFirst.addEventListener('click', function(){
-        if(CowFirstSit === true){
-            CurCow = 1;
-            TableSection1.classList.toggle("active");
-            TableSection2.classList.toggle("dim");
-            TableSection3.classList.toggle("dim");
-            popOutKitchen();
-            createOrder();
+        if (CurCow === 0){
+            if(CowFirstSit === true){
+                CowFirstSit = false;
+                CurCow = 1;
+                CowFirst.style.background = "url('./resources/images/cow_orderingv2.gif') 0 0";
+                CowFirst.style.backgroundRepeat = "no-repeat";
+                CowFirst.style.backgroundSize = "cover";
+                TableSection1.classList.toggle("active");
+                TableSection2.classList.toggle("dim");
+                TableSection3.classList.toggle("dim");
+                popOutKitchen();
+                createOrder();
+            }
         }
     });
 
     CowSecond.addEventListener('click', function(){
-        if(CowSecondSit === true){
-            return startOrder('Cow2');
+        if (CurCow === 0){
+            if(CowSecondSit === true){
+                CowSecondSit = false;
+                CurCow = 2;
+                CowSecond.style.background = "url('./resources/images/cow_orderingv2.gif') 0 0";
+                CowSecond.style.backgroundRepeat = "no-repeat";
+                CowSecond.style.backgroundSize = "cover";
+                TableSection1.classList.toggle("dim");
+                TableSection2.classList.toggle("active");
+                TableSection3.classList.toggle("dim");
+                popOutKitchen();
+                createOrder();
+            }
         }
     });
 
     CowThird.addEventListener('click', function(){
-        if(CowThirdSit === true){
-            return startOrder('Cow3');
+        if (CurCow === 0){
+            if(CowThirdSit === true){
+                CowThirdSit = false;
+                CurCow = 3;
+                CowThird.style.background = "url('./resources/images/cow_orderingv2.gif') 0 0";
+                CowThird.style.backgroundRepeat = "no-repeat";
+                CowThird.style.backgroundSize = "cover";
+                TableSection1.classList.toggle("dim");
+                TableSection2.classList.toggle("dim");
+                TableSection3.classList.toggle("active");
+                popOutKitchen();
+                createOrder();
+            }
         }
     });
    
     serveButton.addEventListener('click', function(){
-        if (orderComplete === true){
-            return serveOrder();
-        } else {console.log("ORDER IS NOT COMPLETE..")}
-       
+        if (CurCow === 0){
+            console.log("no cows clicked");
+        }else{
+            if (orderComplete === true && serveButtonStatus === true){
+                return serveOrder();
+            } else {console.log("ORDER IS NOT COMPLETE..")}
+        }    
     });
 
     resetButton.addEventListener('click', function(){
-        return resetOrder();
+        if (CurCow === 0){
+            console.log("no cows clicked");
+        }else{return resetOrder();}
     });
     
 
