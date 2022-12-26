@@ -344,9 +344,9 @@
         border-radius: 50px;
         font-family: 'Indie Flower', cursive;
         width: fit-content;
+        height: fit-content;
         max-width: 100%;
         font-size: 25px;
-        height: fit-content;
         padding: 10px;
         position: relative;
         top: 80%;
@@ -627,7 +627,7 @@
             </div>
         </div>
         <div class="customerBlock">
-            <div id="characterSection"><p id="orderLine">...</p></div>
+            <div id="characterSection"><p id="orderLine"></div>
             <div class="TablesGrid">
 
                 <div class="TableSection" id="TableSection1">
@@ -704,6 +704,7 @@
 
     var s_moo = new Audio('./resources/sound/moo.mp3');
     var s_star = new Audio('./resources/sound/star.mp3');
+    var s_click = new Audio('./resources/sound/button.mp3');
     var s_spongebob = new Audio('./resources/sound/SpongeBob.mp3');
 
     s_spongebob.addEventListener('ended', function() {
@@ -711,6 +712,7 @@
         this.play();
     }, false);
 
+    
 
     //default status of table occupation
     var CowFirstSit = false;
@@ -998,9 +1000,19 @@
                 }
             }
         }
-        orderLine.textContent = finalOrder.toString();
+        orderUpdate();
+        
+        
         finalOrder.forEach((element) => {sortedOrder.push(element)});
         orderLine.style.opacity = "100%";
+    }
+
+    function orderUpdate(){
+        var final_string = "";
+        for (let i = 0; i < finalOrder.length; i++) {
+            final_string += ((i + 1 ) + ".) " + finalOrder[i].toString() + "<br/>");
+        }
+        orderLine.innerHTML = final_string;
     }
 
     function checkOrder(){
@@ -1047,7 +1059,7 @@
         serveButton.style.opacity = "20%";
         orderPrepared = [];
         console.log("reset order"+finalOrder);
-        orderLine.textContent = finalOrder.toString();
+        orderUpdate();
         setTimeout(function(){
             while (foodPreview.firstChild) {
                 foodPreview.removeChild(foodPreview.lastChild);
@@ -1124,44 +1136,45 @@
 
     
     bread.addEventListener('click', function(){
-        if(levelCounter >= 1){return spawn('bread');}
+        if(levelCounter >= 1){s_click.play(); return spawn('bread');}
     });
 
     cookies.addEventListener('click', function(){
-        if(levelCounter >= 1){return spawn('cookies');}
+        if(levelCounter >= 1){s_click.play(); return spawn('cookies');}
     });
 
     sandwich.addEventListener('click', function(){
-        if(levelCounter >= 2){return spawn('sandwich');}
+        if(levelCounter >= 2){s_click.play(); return spawn('sandwich');}
     });
 
     icecream.addEventListener('click', function(){
-        if(levelCounter >= 2){return spawn('icecream');}
+        if(levelCounter >= 2){s_click.play(); return spawn('icecream');}
     });
 
     cake.addEventListener('click', function(){
-        if(levelCounter >= 3){return spawn('cake');}
+        if(levelCounter >= 3){s_click.play(); return spawn('cake');}
     });
 
     nachos.addEventListener('click', function(){
-        if(levelCounter >= 3){return spawn('nachos');}
+        if(levelCounter >= 3){s_click.play(); return spawn('nachos');}
     });
 
     donut.addEventListener('click', function(){
-        if(levelCounter >= 4){return spawn('donut');}
+        if(levelCounter >= 4){s_click.play(); return spawn('donut');}
     });
 
     burger.addEventListener('click', function(){
-        if(levelCounter >= 4){return spawn('burger');}
+        if(levelCounter >= 4){s_click.play(); return spawn('burger');}
     });
 
     pizza.addEventListener('click', function(){
-        if(levelCounter >= 5){return spawn('pizza');}
+        if(levelCounter >= 5){s_click.play(); return spawn('pizza');}
     });
 
     CowFirst.addEventListener('click', function(){
         if (CurCow === 0){
             if(CowFirstSit === true){
+                s_click.play();
                 CowFirstSit = false;
                 CurCow = 1;
                 CowFirst.style.background = "url('./resources/images/cow_orderingv2.gif') 0 0";
@@ -1179,6 +1192,7 @@
     CowSecond.addEventListener('click', function(){
         if (CurCow === 0){
             if(CowSecondSit === true){
+                s_click.play();
                 CowSecondSit = false;
                 CurCow = 2;
                 CowSecond.style.background = "url('./resources/images/cow_orderingv2.gif') 0 0";
@@ -1196,6 +1210,7 @@
     CowThird.addEventListener('click', function(){
         if (CurCow === 0){
             if(CowThirdSit === true){
+                s_click.play();
                 CowThirdSit = false;
                 CurCow = 3;
                 CowThird.style.background = "url('./resources/images/cow_orderingv2.gif') 0 0";
@@ -1215,15 +1230,15 @@
             console.log("no cows clicked");
         }else{
             if (orderComplete === true && serveButtonStatus === true){
-                return serveOrder();
-            } else {console.log("ORDER IS NOT COMPLETE..")}
+                s_click.play(); return serveOrder();
+            } else {s_click.play(); console.log("ORDER IS NOT COMPLETE..")}
         }    
     });
 
     resetButton.addEventListener('click', function(){
         if (CurCow === 0){
-            console.log("no cows clicked");
-        }else{return resetOrder();}
+            s_click.play(); console.log("no cows clicked");
+        }else{s_click.play(); return resetOrder();}
     });
     
 
