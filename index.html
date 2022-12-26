@@ -574,11 +574,96 @@
         transform: translateY(-50%);
         font-family: 'Indie Flower', cursive;
     }
+
+    #intro{
+        position: absolute;
+        z-index: 3;
+        height: 70vh;
+        width: 90vw;
+        margin-top: 100px;
+        border-radius: 20px;
+        background-color: burlywood;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+    }
+
+    .mainScroll{
+        margin-top: 20px;
+        max-height: 80%;
+        width: 100%;
+        background-color: aliceblue;
+        border-radius: 10px;
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+
+    #start{
+        position: relative;
+        margin-top: 20px;
+        width: 100%;
+        font-size: 40px;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-family: 'Indie Flower', cursive;
+        border-radius: 20px;
+    }
+
+    h5{
+        margin-bottom: 0px;
+        text-align: center;
+        margin-top: 0px;
+        font-size: 50px;
+        padding-left: 50px;
+        height: fit-content;
+        font-family: 'Indie Flower', cursive; 
+    }
+
+    h2{
+        text-align: center;
+        font-size: 40px;
+        padding-left: 20px;
+        font-family: 'Indie Flower', cursive; 
+    }
+
+    p{
+        margin-top: -30px;
+        text-align: center;
+        font-size: 30px;
+        padding-left: 20px;
+        font-family: 'Indie Flower', cursive;   
+    }
     
 </style>
 </head>
 
 <body id="bodyID">
+    <div id="intro">
+        <div class="mainScroll">
+            <h5>----- 🐮 FAQ 🐮 -----</h5>
+            <h2>HOW DO I PLAY?</h2>
+            <p>Click the cows once they're seated 🐄👆 and complete their order.<br/>Unlock all Moochelin stars ⭐ to obtain all recipes!</p>
+            <h2>WHY COWS?</h2>
+            <p>I love cows!</p>
+            <h2>HOW DID YOU MAKE THIS?</h2>
+            <p>Pure HTML, CSS  and Javascript.<br/>
+            Animation is done in Krita and Moophone is purely CSS.<br/>
+            FUN FACT: Moo phone's time is dynamic.
+            </p>
+            <h2>HOW LONG DID IT TAKE YOU?</h2>
+            <p>An inconsistent week of procrastination.</p>
+            <h2>WILL THERE BE A SEQUEL?</h2>
+            <p>Maybe? This is a side project.<br/>No plans on proceeding with game development career.</p>
+            <h2>WHATS THE MUSIC?</h2>
+            <p>Spongebob - Hawaiian Happiness</p>
+            <h2>YOU VEGAN?</h2>
+            <p>No. Again, I'm not going moo moo vegan..</p>
+            <h2>OTHER PLATFORMS?</h2>
+            <p>Only playable on PC Computers atm.<br/>Loadable on mobile, but I don't recommend it.</p>
+            <h2>----- MOOPANDA v1.1.6 -----</h2>
+        </div>
+        <button id="start">OKAY..</button>
+    </div>
     <div id="background"></div>
     <div id="mooPhone">
         <div id="phoneScreen">
@@ -670,8 +755,10 @@
     const star3 = document.getElementById('star3');
     const star4 = document.getElementById('star4');
     const levelTracker = document.getElementById('levelTracker');
-    
 
+    const startgame = document.getElementById('start');
+    const intro = document.getElementById('intro');
+    
     
     const mooPhone = document.getElementById('mooPhone');
     const time = document.getElementById('time');
@@ -1128,12 +1215,17 @@
         actionSection.style.opacity = "100%";
         actionSection.style.animation = "popOutAnim 0.5s forwards";
         
+        
+    }
+
+
+    startgame.addEventListener('click', function(){
+        intro.style.top = "150%";
         if (music === false){
             s_spongebob.play();
             music = true;
         }
-    }
-
+    });
     
     bread.addEventListener('click', function(){
         if(levelCounter >= 1){s_click.play(); return spawn('bread');}
