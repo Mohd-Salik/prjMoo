@@ -5,6 +5,7 @@
 <style>
 
     @import url('https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
     
     body{
         display: flex;
@@ -46,6 +47,7 @@
     }
     
     #kitchenBlock{
+        position: relative;
         opacity: 0%;
         height: 95vh;
         width: 50vw;
@@ -86,13 +88,64 @@
     }
 
 
-    #burger{
-        background-image: url('./resources/protoimages/burger.png');
+    #bread{
+        backdrop-filter: blur(20px);
+        opacity: 30%;
+        background-image: url('./resources/protoimages/questionmark.png');
     }
 
 
-    #fries{
-        background-image: url('./resources/protoimages/fries.png');
+    #cookies{
+        backdrop-filter: blur(20px);
+        opacity: 30%;
+        background-image: url('./resources/protoimages/questionmark.png');
+    }
+
+    #sandwich{
+        backdrop-filter: blur(20px);
+        opacity: 30%;
+        background-image: url('./resources/protoimages/questionmark.png');
+    }
+
+    #icecream{
+        backdrop-filter: blur(20px);
+        opacity: 30%;
+        background-image: url('./resources/protoimages/questionmark.png');
+    }
+
+    #cake{
+        backdrop-filter: blur(20px);
+        opacity: 30%;
+        background-image: url('./resources/protoimages/questionmark.png');
+    }
+
+    #nachos{
+        backdrop-filter: blur(20px);
+        opacity: 30%;
+        background-image: url('./resources/protoimages/questionmark.png');
+    }
+
+    #donut{
+        backdrop-filter: blur(20px);
+        opacity: 30%;
+        background-image: url('./resources/protoimages/questionmark.png');
+    }
+
+    #burger{
+        backdrop-filter: blur(20px);
+        opacity: 30%;
+        background-image: url('./resources/protoimages/questionmark.png');
+    }
+
+    #pizza{
+        backdrop-filter: blur(20px);
+        opacity: 30%;
+        background-image: url('./resources/protoimages/questionmark.png');
+    }
+
+    #questionmark{
+        backdrop-filter: blur(20px);
+        background-image: url('./resources/protoimages/questionmark.png');
     }
 
     #shutterBG{
@@ -103,7 +156,8 @@
         z-index: 0;
         background-size: cover;
         background-repeat: no-repeat;
-        opacity: 50%;
+        opacity: 100%;
+        border-radius: 20px;
         background-image: url('./resources/protoimages/wallmetal.jpg');
     }
     
@@ -134,7 +188,13 @@
 
 
     .previewSection{
+        position: relative;
+        background: url('./resources/images/chef.png') 0 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center; 
         height: 65vh;
+        z-index: -1;
     }
 
 
@@ -272,8 +332,10 @@
         background-color: rgb(255, 255, 255);
         border: 3px solid rgb(0, 0, 0);
         border-radius: 50px;
-        font-family: 'Rubik Spray Paint', cursive;
+        font-family: 'Indie Flower', cursive;
         width: fit-content;
+        max-width: 100%;
+        font-size: 25px;
         height: fit-content;
         padding: 10px;
         position: relative;
@@ -373,6 +435,8 @@
     }
 
     .phoneHelp{
+        font-family: 'Indie Flower', cursive;
+        font-size: 20px;
         position: relative;
         transform: scale(0.8);
         width: 100%;
@@ -459,6 +523,7 @@
         height: 10%;
         width: 100%;
         font-size: 25px;
+        font-family: 'Indie Flower', cursive;
         text-align: center;
         color: black;
     }
@@ -513,6 +578,7 @@
         height: 100%;
         width: 200%;  
         transform: translateY(-50%);
+        font-family: 'Indie Flower', cursive;
     }
     
 
@@ -553,15 +619,15 @@
     <div class="mainScreenDiv" id="mainScreenDiv">
         <div id="kitchenBlock">
             <div class="catalogSection">
-                <button class="item" id="burger"></button>
-                <button class="item"id="fries"></button>
-                <div class="grid-item">3</div>
-                <div class="grid-item">4</div>
-                <div class="grid-item">5</div>
-                <div class="grid-item">6</div>
-                <div class="grid-item">7</div>
-                <div class="grid-item">8</div>
-                <div class="grid-item">9</div>
+                <button class="item" id="bread"></button>
+                <button class="item"id="cookies"></button>
+                <button class="item" id="sandwich"></button>
+                <button class="item"id="icecream"></button>
+                <button class="item" id="cake"></button>
+                <button class="item"id="nachos"></button>
+                <button class="item" id="donut"></button>
+                <button class="item"id="burger"></button>
+                <button class="item" id="pizza"></button>
             </div>
             <div class="previewSection" id="orderPreview">
                 <div class="shutterBG" id="shutterBG"></div>
@@ -608,13 +674,29 @@
     const completeCowAnim = document.getElementById('completeCow');
     const completePun = document.getElementById('completePun');
 
+    const star1 = document.getElementById('star1');
+    const star2 = document.getElementById('star2');
+    const star3 = document.getElementById('star3');
+    const star4 = document.getElementById('star4');
+    const levelTracker = document.getElementById('levelTracker');
+    
+
     
     const mooPhone = document.getElementById('mooPhone');
     const time = document.getElementById('time');
 
     const body = document.getElementById('bodyID');
+
+    const bread = document.getElementById('bread');
+    const cookies = document.getElementById('cookies');
+    const sandwich = document.getElementById('sandwich');
+    const icecream = document.getElementById('icecream');
+    const cake = document.getElementById('cake');
+    const nachos = document.getElementById('nachos');
+    const donut = document.getElementById('donut');
     const burger = document.getElementById('burger');
-    const fries = document.getElementById('fries');
+    const pizza = document.getElementById('pizza');
+
     const orderPreview = document.getElementById('orderPreview');
     const foodPreview = document.getElementById('foodPreview');
     const shutter = document.getElementById('shutterBG');
@@ -629,12 +711,29 @@
     const TableSection2 = document.getElementById('TableSection2');
     const TableSection3 = document.getElementById('TableSection3');
 
+    var s_moo = new Audio('./resources/sound/moo.mp3');
+    var s_star = new Audio('./resources/sound/star.mp3');
+    var s_spongebob = new Audio('./resources/sound/SpongeBob.mp3');
+    s_spongebob.play();
+
+    s_spongebob.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+    }, false);
+
+
     //default status of table occupation
     var CowFirstSit = false;
     var CowSecondSit = false;
     var CowThirdSit = false;
 
     var TablesAvailability = [0, 0, 0];
+    var scoreRange = [0, 3, 3, 4, 4, 5];
+    var levelCounter = 1;
+    var scoreCounter;
+    scoreCounter = scoreRange[0];
+    
+
     const cowCompleteAnimations = ["served1.gif", "served2.gif", "served3.gif"];
 
     var CurCow = 0;
@@ -644,9 +743,7 @@
     const resetButton = document.getElementById('resetButton');
     const debuggertext = document.getElementById('testtext');
 
-    
-    
-    const orders = ["burger", "fries"];
+    var orders = [];
     var finalOrder = [];
     var sortedOrder = [];
     var orderPrepared = [];
@@ -657,6 +754,126 @@
     mooPhone.offsetWidth;
     mooPhone.style.opacity = "100%";
     mooPhone.style.animation = "popOutAnim 0.5s forwards";
+
+    checkScore();
+
+    function checkScore(){
+        if (levelCounter < 6){
+            levelTracker.textContent = "CUSTOMER TILL MOOCHELIN STAR: " + scoreCounter.toString();
+            if (scoreCounter === 0){
+                if (levelCounter === 1){
+                    scoreCounter = scoreRange[1];
+                    levelCounter +=1;
+                    levelTracker.textContent = "CUSTOMER TILL MOOCHELIN STAR: " + scoreCounter.toString();
+                    bread.style.background = "url('./resources/protoimages/bread.png')";
+                    bread.style.backgroundRepeat = "no-repeat";
+                    bread.style.backgroundSize = "contain";
+                    bread.style.backgroundPosition = "center";
+                    bread.style.opacity = "100%";
+                    
+                    cookies.style.background = "url('./resources/protoimages/cookies.png')";
+                    cookies.style.backgroundRepeat = "no-repeat";
+                    cookies.style.backgroundSize = "contain";
+                    cookies.style.backgroundPosition = "center";
+                    cookies.style.opacity = "100%";
+                    
+                    orders.push("bread");
+                    orders.push("cookies");
+                }else if (levelCounter === 2){
+                    s_star.play();
+                    scoreCounter = scoreRange[2];
+                    star1.style.background = "url('./resources/images/star_complete.gif') 0 0";
+                    star1.style.backgroundRepeat = "no-repeat";
+                    star1.style.backgroundSize = "cover";
+                    star1.style.opacity = "100%";
+                    levelCounter +=1;
+                    levelTracker.textContent = "CUSTOMER TILL MOOCHELIN STAR: " + scoreCounter.toString();
+
+                    sandwich.style.background = "url('./resources/protoimages/sandwich.png')";
+                    sandwich.style.backgroundRepeat = "no-repeat";
+                    sandwich.style.backgroundSize = "contain";
+                    sandwich.style.backgroundPosition = "center";
+                    sandwich.style.opacity = "100%";
+                    
+                    icecream.style.background = "url('./resources/protoimages/icecream.png')";
+                    icecream.style.backgroundRepeat = "no-repeat";
+                    icecream.style.backgroundSize = "contain";
+                    icecream.style.backgroundPosition = "center";
+                    icecream.style.opacity = "100%";
+
+                    orders.push("sandwich");
+                    orders.push("icecream");
+                }else if (levelCounter === 3){
+                    s_star.play();
+                    scoreCounter = scoreRange[3];
+                    star2.style.background = "url('./resources/images/star_complete.gif') 0 0";
+                    star2.style.backgroundRepeat = "no-repeat";
+                    star2.style.backgroundSize = "cover";
+                    star2.style.opacity = "100%";
+                    levelCounter +=1;
+                    levelTracker.textContent = "CUSTOMER TILL MOOCHELIN STAR: " + scoreCounter.toString();
+
+                    cake.style.background = "url('./resources/protoimages/cake.png')";
+                    cake.style.backgroundRepeat = "no-repeat";
+                    cake.style.backgroundSize = "contain";
+                    cake.style.backgroundPosition = "center";
+                    cake.style.opacity = "100%";
+                    
+                    nachos.style.background = "url('./resources/protoimages/nachos.png')";
+                    nachos.style.backgroundRepeat = "no-repeat";
+                    nachos.style.backgroundSize = "contain";
+                    nachos.style.backgroundPosition = "center";
+                    nachos.style.opacity = "100%";
+
+                    orders.push("cake");
+                    orders.push("nachos");
+                }else if (levelCounter === 4){
+                    s_star.play();
+                    scoreCounter = scoreRange[4];
+                    star3.style.background = "url('./resources/images/star_complete.gif') 0 0";
+                    star3.style.backgroundRepeat = "no-repeat";
+                    star3.style.backgroundSize = "cover";
+                    star3.style.opacity = "100%";
+                    levelCounter +=1;
+                    levelTracker.textContent = "CUSTOMER TILL MOOCHELIN STAR: " + scoreCounter.toString();
+
+                    donut.style.background = "url('./resources/protoimages/donuts.png')";
+                    donut.style.backgroundRepeat = "no-repeat";
+                    donut.style.backgroundSize = "contain";
+                    donut.style.backgroundPosition = "center";
+                    donut.style.opacity = "100%";
+                    
+                    burger.style.background = "url('./resources/protoimages/burger.png')";
+                    burger.style.backgroundRepeat = "no-repeat";
+                    burger.style.backgroundSize = "contain";
+                    burger.style.backgroundPosition = "center";
+                    burger.style.opacity = "100%";
+
+                    orders.push("donut");
+                    orders.push("burger");
+                }else if (levelCounter === 5){
+                    s_star.play();
+                    scoreCounter = scoreRange[5];
+                    star4.style.background = "url('./resources/images/star_complete.gif') 0 0";
+                    star4.style.backgroundRepeat = "no-repeat";
+                    star4.style.backgroundSize = "cover";
+                    star4.style.opacity = "100%";
+                    levelCounter +=1;
+                    levelTracker.textContent = "Congrats you've unlocked all vegan recipes!";
+
+                    pizza.style.background = "url('./resources/protoimages/pizza.png')";
+                    pizza.style.backgroundRepeat = "no-repeat";
+                    pizza.style.backgroundSize = "contain";
+                    pizza.style.backgroundPosition = "center";
+                    pizza.style.opacity = "100%";
+
+                    orders.push("pizza");
+                }
+            }
+        }
+    }
+    
+    
 
     function findIndexes (array, value) { 
         var idxs = [];
@@ -732,6 +949,7 @@
     function spawn(item) {
         var div = document.createElement("div");
         div.style.position = "absolute";
+        div.style.zIndex = 1;
         div.style.bottom = "100%";
         div.style.left = Math.floor(Math.random()*70)+"%";
         div.style.width = "200px";
@@ -742,13 +960,33 @@
         orderPrepared.push(item);
         checkOrder();
 
-        if (item === 'burger'){
+        if (item === 'bread'){
+            div.style.backgroundImage = "url('./resources/protoimages/bread.png')";
+            foodPreview.appendChild(div);
+        } else if (item === 'cookies'){
+            div.style.backgroundImage = "url('./resources/protoimages/cookies.png')";
+            foodPreview.appendChild(div);
+        }else if (item === 'sandwich'){
+            div.style.backgroundImage = "url('./resources/protoimages/sandwich.png')";
+            foodPreview.appendChild(div);
+        }else if (item === 'icecream'){
+            div.style.backgroundImage = "url('./resources/protoimages/icecream.png')";
+            foodPreview.appendChild(div);
+        }else if (item === 'cake'){
+            div.style.backgroundImage = "url('./resources/protoimages/cake.png')";
+            foodPreview.appendChild(div);
+        }else if (item === 'nachos'){
+            div.style.backgroundImage = "url('./resources/protoimages/nachos.png')";
+            foodPreview.appendChild(div);
+        }else if (item === 'donut'){
+            div.style.backgroundImage = "url('./resources/protoimages/donuts.png')";
+            foodPreview.appendChild(div);
+        }else if (item === 'burger'){
             div.style.backgroundImage = "url('./resources/protoimages/burger.png')";
             foodPreview.appendChild(div);
-        } else if (item === 'fries'){
-            div.style.backgroundImage = "url('./resources/protoimages/fries.png')";
+        }else if (item === 'pizza'){
+            div.style.backgroundImage = "url('./resources/protoimages/pizza.png')";
             foodPreview.appendChild(div);
-            
         }
     }
 
@@ -759,7 +997,7 @@
         orderLine.style.opacity = "100%";
         finalOrder = [];
         sortedOrder = [];
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < (levelCounter + 1); i++) {
             if (i === 0){
                 finalOrder.push(orders[Math.floor(Math.random()*orders.length)]);
             } else{
@@ -789,6 +1027,8 @@
 
     function serveOrder(){
         shutter.classList.toggle("raise");
+        scoreCounter -=1;
+        checkScore();
         var cowAnimation = cowCompleteAnimations[Math.floor(Math.random()*cowCompleteAnimations.length)]
         completeCowAnim.style.background = "url('./resources/images/"+cowAnimation+"') 0 0";
         completeCowAnim.style.backgroundRepeat = "no-repeat";
@@ -797,6 +1037,7 @@
         animationComplete.style.animation = null;
         animationComplete.offsetWidth;
         animationComplete.style.animation = "moveIn 2s forwards";
+        s_moo.play();
         setTimeout(function(){
             while (foodPreview.firstChild) {
                 foodPreview.removeChild(foodPreview.lastChild);
@@ -886,11 +1127,40 @@
     }
 
     
-    burger.addEventListener('click', function(){
-        return spawn('burger');
+    bread.addEventListener('click', function(){
+        if(levelCounter >= 1){return spawn('bread');}
     });
-    fries.addEventListener('click', function(){
-        return spawn('fries');
+
+    cookies.addEventListener('click', function(){
+        if(levelCounter >= 1){return spawn('cookies');}
+    });
+
+    sandwich.addEventListener('click', function(){
+        if(levelCounter >= 2){return spawn('sandwich');}
+    });
+
+    icecream.addEventListener('click', function(){
+        if(levelCounter >= 2){return spawn('icecream');}
+    });
+
+    cake.addEventListener('click', function(){
+        if(levelCounter >= 3){return spawn('cake');}
+    });
+
+    nachos.addEventListener('click', function(){
+        if(levelCounter >= 3){return spawn('nachos');}
+    });
+
+    donut.addEventListener('click', function(){
+        if(levelCounter >= 4){return spawn('donut');}
+    });
+
+    burger.addEventListener('click', function(){
+        if(levelCounter >= 4){return spawn('burger');}
+    });
+
+    pizza.addEventListener('click', function(){
+        if(levelCounter >= 5){return spawn('pizza');}
     });
 
     CowFirst.addEventListener('click', function(){
