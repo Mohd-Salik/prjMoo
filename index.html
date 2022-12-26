@@ -714,7 +714,6 @@
     var s_moo = new Audio('./resources/sound/moo.mp3');
     var s_star = new Audio('./resources/sound/star.mp3');
     var s_spongebob = new Audio('./resources/sound/SpongeBob.mp3');
-    s_spongebob.play();
 
     s_spongebob.addEventListener('ended', function() {
         this.currentTime = 0;
@@ -726,6 +725,7 @@
     var CowFirstSit = false;
     var CowSecondSit = false;
     var CowThirdSit = false;
+    var music = false;
 
     var TablesAvailability = [0, 0, 0];
     var scoreRange = [0, 3, 3, 4, 4, 5];
@@ -1124,6 +1124,11 @@
         actionSection.offsetWidth;
         actionSection.style.opacity = "100%";
         actionSection.style.animation = "popOutAnim 0.5s forwards";
+        
+        if (music === false){
+            s_spongebob.play();
+            music = true;
+        }
     }
 
     
